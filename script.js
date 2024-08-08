@@ -7,11 +7,11 @@ const darkenButton = document.querySelector("#darken");
 
 let pixelColor = "black";
 let gridSize = 256;
-
 let pixelSideLength = Math.sqrt(
   Math.pow(mainContainer.clientWidth, 2) / gridSize
 );
-// pixelSideLength = Math.floor(pixelSideLength);
+
+let pixelDimension = `width: ${pixelSideLength}px; height: ${pixelSideLength}px`;
 function setGridSize(e) {
   let userSizeInput = prompt("Please enter your desired grid scale");
   gridSize = Math.pow(userSizeInput, 2);
@@ -29,10 +29,7 @@ function randomIdGenerator() {
 for (let i = 0; i < gridSize; i++) {
   const gridPixel = document.createElement("div");
   gridPixel.className = "pixel";
-  gridPixel.setAttribute(
-    "style",
-    `width: ${pixelSideLength}px; height: ${pixelSideLength}px`
-  );
+  gridPixel.setAttribute("style", pixelDimension);
   gridPixel.setAttribute("id", randomIdGenerator());
 
   mainContainer.appendChild(gridPixel);
@@ -46,4 +43,10 @@ function changeBgColor(e) {
     `${target.getAttribute("style")}; background-color:black`
   );
 }
+function clearPage() {
+  const divs = mainContainer.querySelectorAll("div");
+  divs.forEach((item) => item.setAttribute("style", pixelDimension));
+}
+
 mainContainer.addEventListener("mouseover", changeBgColor);
+clearButton.addEventListener("click", clearPage);
