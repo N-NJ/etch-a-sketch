@@ -9,10 +9,8 @@ let pixelColor = "black";
 let gridSize = 256;
 let strokeColor = "black";
 let mode = "fixed";
-let pixelSideLength = Math.sqrt(
-  Math.pow(mainContainer.clientWidth, 2) / gridSize
-);
-let pixelDimension = `width: ${pixelSideLength}px; height: ${pixelSideLength}px`;
+let pixelSideLength;
+let pixelDimension;
 
 window.addEventListener("DOMContentLoaded", generateSketchBook);
 
