@@ -37,7 +37,19 @@ function generateSketchBook() {
     mainContainer.appendChild(gridPixel);
   }
 }
-
+function setGridSize(e) {
+  let userSizeInput = prompt(
+    "Please enter your desired grid scale *Maximum of 100*"
+  );
+  if (userSizeInput > 100) {
+    userSizeInput = prompt(
+      "Input exceeded limit. Please enter your desired grid scale *Maximum of 100*"
+    );
+  }
+  gridSize = Math.pow(userSizeInput, 2);
+  mainContainer.textContent = "";
+  generateSketchBook();
+}
 function changeBgColor(e) {
   let target = e.target;
   let id = target.getAttribute("id");
@@ -57,12 +69,7 @@ function changeBgColor(e) {
     );
   }
 }
-function setGridSize(e) {
-  let userSizeInput = prompt("Please enter your desired grid scale");
-  gridSize = Math.pow(userSizeInput, 2);
-  mainContainer.textContent = "";
-  generateSketchBook();
-}
+
 function clearPage() {
   const divCells = mainContainer.querySelectorAll("div");
   divCells.forEach((item) => item.setAttribute("style", pixelDimension));
