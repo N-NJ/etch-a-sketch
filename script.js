@@ -10,7 +10,7 @@ let gridSize = 256;
 let pixelSideLength = Math.sqrt(
   Math.pow(mainContainer.clientWidth, 2) / gridSize
 );
-
+let strokeColor;
 let pixelDimension = `width: ${pixelSideLength}px; height: ${pixelSideLength}px`;
 function setGridSize(e) {
   let userSizeInput = prompt("Please enter your desired grid scale");
@@ -31,22 +31,35 @@ for (let i = 0; i < gridSize; i++) {
   gridPixel.className = "pixel";
   gridPixel.setAttribute("style", pixelDimension);
   gridPixel.setAttribute("id", randomIdGenerator());
-
   mainContainer.appendChild(gridPixel);
 }
 
 function changeBgColor(e) {
   let target = e.target;
   console.log(target);
+  // let styleValue = target.getAttribute("style");
+  // if (styleValue.includes("background-color")) {
+
+  // }
   target.setAttribute(
     "style",
-    `${target.getAttribute("style")}; background-color:black`
+    `${target.getAttribute("style")}; background-color:${
+      strokeColor ? strokeColor : "black"
+    }`
   );
 }
 function clearPage() {
-  const divs = mainContainer.querySelectorAll("div");
-  divs.forEach((item) => item.setAttribute("style", pixelDimension));
+  const divCells = mainContainer.querySelectorAll("div");
+  divCells.forEach((item) => item.setAttribute("style", pixelDimension));
 }
-
+function changeColor() {
+  strokeColor = colorButton.value;
+}
+function randomColor() {
+  let randomColor = Math.random() * 1001;
+  strokeColor = `#`;
+}
 mainContainer.addEventListener("mouseover", changeBgColor);
 clearButton.addEventListener("click", clearPage);
+colorButton.addEventListener("change", changeColor);
+randomColorButton.addEventListener("click", randomColor);
