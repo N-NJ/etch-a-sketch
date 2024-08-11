@@ -36,17 +36,24 @@ for (let i = 0; i < gridSize; i++) {
 
 function changeBgColor(e) {
   let target = e.target;
+  let id = target.getAttribute("id");
+  let styleValue = target.getAttribute("style");
   console.log(target);
-  // let styleValue = target.getAttribute("style");
-  // if (styleValue.includes("background-color")) {
-
-  // }
-  target.setAttribute(
-    "style",
-    `${target.getAttribute("style")}; background-color:${
-      strokeColor ? strokeColor : "black"
-    }`
-  );
+  if (styleValue.includes("background-color")) {
+    target.setAttribute(
+      "style",
+      pixelDimension +
+        `; background-color:${strokeColor ? strokeColor : "black"}`
+    );
+    target.setAttribute("id", id);
+  } else {
+    target.setAttribute(
+      "style",
+      `${target.getAttribute("style")}; background-color:${
+        strokeColor ? strokeColor : "black"
+      }`
+    );
+  }
 }
 function clearPage() {
   const divCells = mainContainer.querySelectorAll("div");
