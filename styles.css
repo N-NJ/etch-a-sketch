@@ -13,6 +13,7 @@
   height: 860px;
   justify-content: center;
   outline: 1px solid black;
+  box-shadow: 5px 5px black;
 }
 .main {
   display: flex;
@@ -26,7 +27,7 @@
   gap: 1rem;
 }
 .flex-col button {
-  background-color: rgb(250, 244, 242);
+  background-color: #faf4f2;
   border: none;
   padding: 1em 2em;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;

@@ -3,7 +3,6 @@ const sizeButton = document.querySelector("#size");
 const colorButton = document.querySelector("#colorPicker");
 const clearButton = document.querySelector("#clear");
 const randomColorButton = document.querySelector("#randomColor");
-const darkenButton = document.querySelector("#darken");
 
 let pixelColor = "black";
 let gridSize = 256;
@@ -65,7 +64,9 @@ function changeBgColor(e) {
   } else {
     target.setAttribute(
       "style",
-      `${target.getAttribute("style")}; background-color:${strokeColor}`
+      `${target.getAttribute("style")}; background-color:${
+        mode == "fixed" ? strokeColor : randomColor()
+      }`
     );
   }
 }
