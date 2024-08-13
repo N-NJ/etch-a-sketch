@@ -51,24 +51,8 @@ function setGridSize(e) {
 }
 function changeBgColor(e) {
   let target = e.target;
-  let id = target.getAttribute("id");
-  let styleValue = target.getAttribute("style");
-  console.log(target);
-  if (styleValue.includes("background-color")) {
-    target.setAttribute(
-      "style",
-      pixelDimension +
-        `; background-color:${mode == "fixed" ? strokeColor : randomColor()}`
-    );
-    target.setAttribute("id", id);
-  } else {
-    target.setAttribute(
-      "style",
-      `${target.getAttribute("style")}; background-color:${
-        mode == "fixed" ? strokeColor : randomColor()
-      }`
-    );
-  }
+  target.style.backgroundColor = mode == "fixed" ? strokeColor : randomColor();
+  console.log(target.style.backgroundColor);
 }
 
 function clearPage() {
@@ -111,8 +95,17 @@ function randomColor() {
   }
   return (strokeColor = `#${randomColor.join("")}`);
 }
+function addShading(e) {
+  let target = e.target;
+  let id = target.id;
+  let styling = target.style.opacity;
+  console.log(styling);
+  // target.setAttribute("style", styling);
+  // target.setAttribute("id", id);
+}
 mainContainer.addEventListener("mouseover", changeBgColor);
 sizeButton.addEventListener("click", setGridSize);
 clearButton.addEventListener("click", clearPage);
 colorButton.addEventListener("change", (e) => changeColor(e));
 randomColorButton.addEventListener("click", (e) => changeColor(e));
+mainContainer.addEventListener("click", addShading);
