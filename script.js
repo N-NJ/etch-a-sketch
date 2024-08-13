@@ -33,10 +33,12 @@ function generateSketchBook() {
     gridPixel.className = "pixel";
     gridPixel.setAttribute("style", pixelDimension);
     gridPixel.setAttribute("id", randomIdGenerator());
+    gridPixel.style.opacity = 1;
     mainContainer.appendChild(gridPixel);
   }
 }
 function setGridSize(e) {
+  console.log(e);
   let userSizeInput = prompt(
     "Please enter your desired grid scale *Maximum of 100*"
   );
@@ -44,6 +46,8 @@ function setGridSize(e) {
     userSizeInput = prompt(
       "Input exceeded limit. Please enter your desired grid scale *Maximum of 100*"
     );
+  } else if (!userSizeInput) {
+    return;
   }
   gridSize = Math.pow(userSizeInput, 2);
   mainContainer.textContent = "";
@@ -52,12 +56,14 @@ function setGridSize(e) {
 function changeBgColor(e) {
   let target = e.target;
   target.style.backgroundColor = mode == "fixed" ? strokeColor : randomColor();
-  console.log(target.style.backgroundColor);
 }
 
 function clearPage() {
   const divCells = mainContainer.querySelectorAll("div");
-  divCells.forEach((item) => item.setAttribute("style", pixelDimension));
+  divCells.forEach((item) => {
+    item.setAttribute("style", pixelDimension);
+    item.style.opacity = 1;
+  });
 }
 function changeColor(e) {
   let target = e.target;
@@ -95,17 +101,22 @@ function randomColor() {
   }
   return (strokeColor = `#${randomColor.join("")}`);
 }
-function addShading(e) {
+function increaseOpacity(e) {
   let target = e.target;
-  let id = target.id;
-  let styling = target.style.opacity;
-  console.log(styling);
-  // target.setAttribute("style", styling);
-  // target.setAttribute("id", id);
+  console.log(target);
+  console.log(parseFloat(target.style.opacity));
+  if (parseFloat(target.style.opacity) < 1)
+    target.style.opacity = parseFloat(target.style.opacity) + 0.1;
+}
+function decreaseOpacity(e) {
+  e.preventDefault();
+  let target = e.target;
+  target.style.opacity = parseFloat(target.style.opacity) - 0.1;
 }
 mainContainer.addEventListener("mouseover", changeBgColor);
 sizeButton.addEventListener("click", setGridSize);
 clearButton.addEventListener("click", clearPage);
 colorButton.addEventListener("change", (e) => changeColor(e));
 randomColorButton.addEventListener("click", (e) => changeColor(e));
-mainContainer.addEventListener("click", addShading);
+mainContainer.addEventListener("click", increaseOpacity);
+mainContainer.addEventListener("contextmenu", decreaseOpacity);
