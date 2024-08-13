@@ -111,7 +111,8 @@ function increaseOpacity(e) {
 function decreaseOpacity(e) {
   e.preventDefault();
   let target = e.target;
-  target.style.opacity = parseFloat(target.style.opacity) - 0.1;
+  if (parseFloat(target.style.opacity) > 0)
+    target.style.opacity = parseFloat(target.style.opacity) - 0.1;
 }
 mainContainer.addEventListener("mouseover", changeBgColor);
 sizeButton.addEventListener("click", setGridSize);
