@@ -10,10 +10,9 @@
   display: flex;
   flex-wrap: wrap;
   width: 860px;
-  height: 860px;
   justify-content: center;
   outline: 1px solid black;
-  box-shadow: 5px 5px black;
+  box-shadow: 10px 10px darkgray;
 }
 .main {
   display: flex;
@@ -63,4 +62,37 @@ label[for="color"] {
   background-color: antiquewhite;
   outline: 1px solid red;
   transition: 250ms;
+}
+@media (max-width: 480px) {
+  .main {
+    display: block;
+  }
+  #sketchArea {
+    width: 100%;
+  }
+  .flex-col {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  input[type="color"] {
+    width: 3rem;
+    height: 3rem;
+    /* margin-right: 0.3rem; */
+  }
+  .swatch {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .flex-col button {
+    padding: 0.5em 1em;
+  }
+  .mouse-guide {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
 }
