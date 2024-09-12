@@ -12,7 +12,7 @@ let pixelSideLength;
 let pixelDimension;
 
 window.addEventListener("DOMContentLoaded", generateSketchBook);
-mainContainer.setAttribute("style", `height:${mainContainer.clientWidth}px`);
+mainContainer.clientHeight = mainContainer.clientWidth;
 function generateSketchBook() {
   pixelSideLength = Math.sqrt(
     Math.pow(mainContainer.clientWidth, 2) / gridSize
@@ -39,13 +39,19 @@ function generateSketchBook() {
   }
 }
 function resizeGrid() {
+  mainContainer.clientWidth = Math.round(mainContainer.clientWidth);
+  console.log(
+    `rounded: ${mainContainer.clientWidth}, height ${mainContainer.clientHeight}`
+  );
+  mainContainer.clientHeight = mainContainer.clientWidth;
   pixelSideLength = Math.sqrt(
     Math.pow(mainContainer.clientWidth, 2) / gridSize
   );
   const divCells = mainContainer.querySelectorAll("div");
   divCells.forEach((item) => {
     item.style.width = `${pixelSideLength}px`;
-    item.style.length = `${pixelSideLength}px`;
+    item.style.height = `${pixelSideLength}px`;
+    console.log("length " + item.style.height);
   });
 }
 window.onresize = resizeGrid;
