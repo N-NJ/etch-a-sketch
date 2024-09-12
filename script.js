@@ -12,7 +12,7 @@ let pixelSideLength;
 let pixelDimension;
 
 window.addEventListener("DOMContentLoaded", generateSketchBook);
-
+mainContainer.setAttribute("style", `height:${mainContainer.clientWidth}px`);
 function generateSketchBook() {
   pixelSideLength = Math.sqrt(
     Math.pow(mainContainer.clientWidth, 2) / gridSize
