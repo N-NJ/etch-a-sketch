@@ -53,18 +53,16 @@ function getUserSize() {
   return prompt("Please enter your desired grid scale *Maximum of 100*");
 }
 function setGridSize() {
-  let userSizeInput = getUserSize();
+  let userSizeInput;
   let invalid = true;
   while (invalid) {
     userSizeInput = getUserSize();
-    if (userSizeInput <= 100 || userSizeInput > 0) {
+    if (userSizeInput <= 100 && userSizeInput > 0) {
       invalid = false;
     } else if (!userSizeInput) {
       return;
     }
   }
-
-  console.log(userSizeInput);
   gridSize = Math.pow(Math.round(userSizeInput), 2);
   mainContainer.textContent = "";
   generateSketchBook();
