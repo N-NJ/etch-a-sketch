@@ -27,6 +27,7 @@ function generateSketchBook() {
       return id;
     }
   }
+
   //Generate sketchbook cells.
   for (let i = 0; i < gridSize; i++) {
     const gridPixel = document.createElement("div");
@@ -37,19 +38,34 @@ function generateSketchBook() {
     mainContainer.appendChild(gridPixel);
   }
 }
-function setGridSize(e) {
-  console.log(e);
-  let userSizeInput = prompt(
-    "Please enter your desired grid scale *Maximum of 100*"
+function resizeGrid() {
+  pixelSideLength = Math.sqrt(
+    Math.pow(mainContainer.clientWidth, 2) / gridSize
   );
-  if (userSizeInput > 100) {
-    userSizeInput = prompt(
-      "Input exceeded limit. Please enter your desired grid scale *Maximum of 100*"
-    );
-  } else if (!userSizeInput) {
-    return;
+  const divCells = mainContainer.querySelectorAll("div");
+  divCells.forEach((item) => {
+    item.style.width = `${pixelSideLength}px`;
+    item.style.length = `${pixelSideLength}px`;
+  });
+}
+window.onresize = resizeGrid;
+function getUserSize() {
+  return prompt("Please enter your desired grid scale *Maximum of 100*");
+}
+function setGridSize() {
+  let userSizeInput = getUserSize();
+  let invalid = true;
+  while (invalid) {
+    userSizeInput = getUserSize();
+    if (userSizeInput <= 100 || userSizeInput > 0) {
+      invalid = false;
+    } else if (!userSizeInput) {
+      return;
+    }
   }
-  gridSize = Math.pow(userSizeInput, 2);
+
+  console.log(userSizeInput);
+  gridSize = Math.pow(Math.round(userSizeInput), 2);
   mainContainer.textContent = "";
   generateSketchBook();
 }
